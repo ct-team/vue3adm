@@ -32,23 +32,15 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults } from 'vue';
 import { TableRow } from '@/types/index.d';
 import useCurrentInstance from '@/assets/js/useCurrentInstance';
-interface TableProps {
-  data?: Array<any>;
-  loading?: boolean;
-}
-withDefaults(defineProps<TableProps>(), {
-  data: () => [],
+
+defineProps({
+  data: { type: Array, default: () => [] },
+  loading: Boolean,
 });
-
 // 声明emits
-const emit = defineEmits<{
-  (event: 'open-view', row: TableRow): void;
-  (event: 'open-edit', row: TableRow): void;
-}>();
-
+const emit = defineEmits(['open-view', 'open-edit']);
 const { proxy } = useCurrentInstance();
 
 const handleView = (row: TableRow) => {

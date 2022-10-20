@@ -8,6 +8,7 @@ module.exports = {
     defineProps: 'readonly',
     defineEmits: 'readonly',
     defineExpose: 'readonly',
+    withDefaults: 'readonly',
   },
   extends: [
     'plugin:vue/vue3-essential',
