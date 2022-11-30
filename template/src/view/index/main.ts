@@ -8,7 +8,23 @@ import ElementPlus, { ElMessage } from 'element-plus';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 // import '../../assets/css/skin.scss';
 import * as ElementPlusIconsVue from '@/assets/js/icon';
-import { Toolbar, Search, SearchItem, Http, Permission } from 'ct-dart3';
+import { clearEmptyData } from '@/utils';
+import { apiGetPower } from '@/api/common';
+import { alias, isView } from '@/config/permission';
+import _ from 'lodash';
+import { ResponseInfo } from '@/types';
+import {
+  Toolbar,
+  Search,
+  SearchItem,
+  Http,
+  Permission,
+  ListTemp,
+  ListTempItem,
+  Table,
+  TableColumn,
+  Input,
+} from 'ct-dart3';
 
 const app = createApp(App);
 app.config.globalProperties.$bus = mitt();
@@ -18,21 +34,31 @@ const showErrorMessage = (msg: string) => {
     type: 'error',
   });
 };
+
 app
   .use(ElementPlus, { size: 'small', zIndex: 3000, locale: zhCn })
   .use(ElementPlusIconsVue)
   .use(Toolbar)
   .use(Search)
   .use(SearchItem)
+  .use(ListTemp)
+  .use(ListTempItem)
+  .use(Table)
+  .use(TableColumn)
+  .use(Input)
   .use(Http, {
-    interceptError(res: any) {
+    requestInterceptor(opts: any) {
+      opts.params = clearEmptyData(opts.params);
+      opts.data = clearEmptyData(opts.data);
+    },
+    interceptError(res: ResponseInfo) {
       const data: any = JSON.parse(JSON.stringify(res).toLowerCase());
       showErrorMessage(data.message);
     },
-    interceptorSuccess(res: any) {
+    interceptorSuccess(res: ResponseInfo) {
       const data: any = JSON.parse(JSON.stringify(res).toLowerCase());
       // 对响应成功数据做点什么
-      if (res.code !== 0) {
+      if (data.code !== 0) {
         showErrorMessage(data.message);
       }
     },
@@ -40,26 +66,39 @@ app
   })
   .use(Permission, {
     //设置权限别名
-    alias: {
-      add: 1,
-      del: 2,
-      edit: 3,
-      view: 4,
-    },
+    alias: alias(),
     router: router,
   })
   .use(store)
   .use(router);
-Http.axios
-  .get('http://yapi.tcy365.org:3000/mock/230/api/permission')
-  .then(function (res: any) {
-    if (res.data.code === 0) {
-      Permission.success([1, 2, 3]); //初始化 权限 数据
-      app.mount('#app');
-      return;
-    }
-    Permission.go403(); //无权限提示
-  })
-  .catch(function () {
-    showErrorMessage('权限获取错误');
-  });
+app.mount('#app');
+
+let PermissionPageId = 0;
+
+router.beforeEach(async (to) => {
+  const pageid = Number(to.meta.pageid);
+  if (_.isString(to.meta.title)) {
+    document.title = to.meta.title;
+  }
+  if (pageid && PermissionPageId !== pageid) {
+    await apiGetPower(pageid)
+      .then((res: ResponseInfo) => {
+        if (res.Code === 0) {
+          Permission.success(res.Data);
+          PermissionPageId = pageid;
+          if (!isView(pageid, res.Data)) {
+            Permission.go403();
+          }
+          return true;
+        }
+        Permission.go403();
+        return false;
+      })
+      .catch(function () {
+        showErrorMessage('权限获取错误');
+        return false;
+      });
+    return true;
+  }
+  return true;
+});

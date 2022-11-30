@@ -51,11 +51,19 @@ module.exports = {
     openPage: 'index.html',
     // 配置多个代理
     proxy: {
-      '/api': {
-        target: 'http://yapi.tcy365.org:3000/mock/975/', // 本地模拟数据服务器
+      '/api/Ydmalladm': {
+        target: 'http://yapi.tcy365.org:3000/mock/1554/', // 本地模拟数据服务器
         changeOrigin: true,
-        logLevel: 'debug', //是否输出请求log
+        //logLevel: 'debug', //是否输出请求log
+        pathRewrite: {
+          '^/api/Ydmalladm/': '/api/',
+        },
       },
+      //   '/api/Ydmalladm': {
+      //     target: 'http://site.admin.ct108.org:1507/', // 本地模拟数据服务器
+      //     changeOrigin: true,
+      //     logLevel: 'debug', //是否输出请求log
+      //   },
     },
   },
 };

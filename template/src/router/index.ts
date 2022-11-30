@@ -1,25 +1,25 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-
+import { config } from '@/config/permission';
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    component: () => import('@/pages/Home.vue'),
+    path: '/commodity-management',
+    component: () => import('@/pages/commodity-management/index.vue'),
+    meta: { pageid: config.CM.pageId, title: config.CM.title },
     children: [
       {
-        path: 'drawer',
-        component: () => import('@/pages/Drawer.vue'),
-        children: [
-          {
-            path: 'view',
-            meta: { permission: 'view', title: '查看' },
-            component: () => import('@/pages/View.vue'),
-          },
-          {
-            path: 'edit',
-            meta: { permission: 'edit', title: '编辑' },
-            component: () => import('@/pages/Edit.vue'),
-          },
-        ],
+        path: 'add',
+        component: () => import('@/pages/commodity-management/Edit.vue'),
+        meta: { type: 'add' },
+      },
+      {
+        path: 'edit',
+        component: () => import('@/pages/commodity-management/Edit.vue'),
+        meta: { type: 'edit' },
+      },
+      {
+        path: 'alert-setting',
+        component: () =>
+          import('@/pages/commodity-management/AlertSetting.vue'),
       },
     ],
   },
