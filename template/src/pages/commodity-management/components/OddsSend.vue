@@ -49,7 +49,7 @@
     <dart-list-temp-item prop="GrantCount" width="120px" label="单次发放数量">
       <template #default="scope">
         <input-number
-          :disabled="scope.row.CanSoldCount === '' || isEdit"
+          :disabled="scope.row.CanSoldCount === ''"
           :precision="0"
           v-model="scope.row.GrantCount"
           :min="1"
@@ -69,7 +69,7 @@
     >
       <template #default="scope">
         <input-number
-          :disabled="scope.row.CanSoldCount === '' || isEdit"
+          :disabled="scope.row.CanSoldCount === ''"
           :precision="0"
           v-model="scope.row.RoundGrantTotalCount"
           :key="scope.row.DLTKEY + scope.row.GrantCount"

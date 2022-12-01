@@ -39,14 +39,14 @@
     <dart-list-temp-item label="名称" min-width="180px">
       <template #default="scope">
         <div>
-          {{ scope.row.Name === '' ? '--' : scope.row.Name }}
+          {{ scope.row.Name }}
         </div>
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item prop="GrantCount" width="120px" label="发放数量">
       <template #default="scope">
         <input-number
-          :disabled="scope.row.CanSoldCount === '' || isEdit"
+          :disabled="scope.row.CanSoldCount === ''"
           :precision="0"
           v-model="scope.row.GrantCount"
           :min="1"
@@ -57,7 +57,7 @@
 
     <dart-list-temp-item label="库存" width="150px" align="center">
       <template #default="scope">
-        {{ scope.row.CanSoldCount === '' ? '--' : scope.row.CanSoldCount }}
+        {{ scope.row.CanSoldCount }}
       </template>
     </dart-list-temp-item>
   </dart-list-temp>

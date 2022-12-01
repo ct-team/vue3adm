@@ -12,9 +12,9 @@
             @change="onClearVaid('list')"
           >
             <dart-list-temp-item prop="UserName" label="用户名">
-              <template #default="{ item }">
+              <template #default="scope">
                 <el-input
-                  v-model="item.row.UserName"
+                  v-model="scope.row.UserName"
                   placeholder="请输入用户名"
                   :max-length="30"
                   clearable
@@ -22,9 +22,9 @@
               </template>
             </dart-list-temp-item>
             <dart-list-temp-item prop="Email" label="邮箱">
-              <template #default="{ item }">
+              <template #default="scope">
                 <el-input
-                  v-model="item.row.Email"
+                  v-model="scope.row.Email"
                   placeholder="请输入邮箱"
                   :max-length="100"
                   clearable
@@ -32,9 +32,9 @@
               </template>
             </dart-list-temp-item>
             <dart-list-temp-item prop="Phone" label="手机号">
-              <template #default="{ item }">
+              <template #default="scope">
                 <dart-input
-                  v-model="item.row.Phone"
+                  v-model="scope.row.Phone"
                   input-type="num"
                   placeholder="请输入手机号"
                   :maxlength="11"
