@@ -17,18 +17,18 @@
     }"
   >
     <dart-list-temp-item prop="BatchNo" width="180px" label="批次编号">
-      <template #default="{ item }">
+      <template #default="scope">
         <dart-input
-          v-model="item.row.BatchNo"
-          :readonly="item.row.loading"
+          v-model="scope.row.BatchNo"
+          :readonly="scope.row.loading"
           :disabled="isEdit"
           input-type="num"
           clearable
           :maxlength="30"
-          @blur="onChangeID(item.row)"
-          @clear="onChangeID(item.row, true)"
+          @blur="onChangeID(scope.row)"
+          @clear="onChangeID(scope.row, true)"
         >
-          <template #suffix v-if="item.row.loading">
+          <template #suffix v-if="scope.row.loading">
             <el-icon class="is-loading">
               <Loading />
             </el-icon>
@@ -37,27 +37,27 @@
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item label="名称" min-width="180px">
-      <template #default="{ item }">
+      <template #default="scope">
         <div>
-          {{ item.row.Name === '' ? '--' : item.row.Name }}
+          {{ scope.row.Name === '' ? '--' : scope.row.Name }}
         </div>
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item prop="GrantCount" width="120px" label="发放数量">
-      <template #default="{ item }">
+      <template #default="scope">
         <input-number
-          :disabled="item.row.CanSoldCount === '' || isEdit"
+          :disabled="scope.row.CanSoldCount === '' || isEdit"
           :precision="0"
-          v-model="item.row.GrantCount"
+          v-model="scope.row.GrantCount"
           :min="1"
-          :max="getMaxNum(item.row.CanSoldCount, maxSendNum)"
+          :max="getMaxNum(scope.row.CanSoldCount, maxSendNum)"
         />
       </template>
     </dart-list-temp-item>
 
     <dart-list-temp-item label="库存" width="150px" align="center">
-      <template #default="{ item }">
-        {{ item.row.CanSoldCount === '' ? '--' : item.row.CanSoldCount }}
+      <template #default="scope">
+        {{ scope.row.CanSoldCount === '' ? '--' : scope.row.CanSoldCount }}
       </template>
     </dart-list-temp-item>
   </dart-list-temp>

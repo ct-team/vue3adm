@@ -20,18 +20,18 @@
     }"
   >
     <dart-list-temp-item prop="BatchNo" width="150px" label="批次编号">
-      <template #default="{ item }">
+      <template #default="scope">
         <dart-input
           :disabled="isEdit"
-          v-model="item.row.BatchNo"
-          :readonly="item.row.loading"
+          v-model="scope.row.BatchNo"
+          :readonly="scope.row.loading"
           input-type="num"
           clearable
           :maxlength="30"
-          @blur="onChangeID(item.row)"
-          @clear="onChangeID(item.row, true)"
+          @blur="onChangeID(scope.row)"
+          @clear="onChangeID(scope.row, true)"
         >
-          <template #suffix v-if="item.row.loading">
+          <template #suffix v-if="scope.row.loading">
             <el-icon class="is-loading">
               <Loading />
             </el-icon>
@@ -40,23 +40,23 @@
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item label="名称" min-width="100px">
-      <template #default="{ item }">
+      <template #default="scope">
         <div>
-          {{ item.row.Name }}
+          {{ scope.row.Name }}
         </div>
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item prop="GrantCount" width="120px" label="单次发放数量">
-      <template #default="{ item }">
+      <template #default="scope">
         <input-number
-          :disabled="item.row.CanSoldCount === '' || isEdit"
+          :disabled="scope.row.CanSoldCount === '' || isEdit"
           :precision="0"
-          v-model="item.row.GrantCount"
+          v-model="scope.row.GrantCount"
           :min="1"
-          :max="getMaxNum(item.row.CanSoldCount, maxGrantCount)"
+          :max="getMaxNum(scope.row.CanSoldCount, maxGrantCount)"
           @change="
             (newValue, oldValue) => {
-              onChangeGrantCount(newValue, oldValue, item.row);
+              onChangeGrantCount(newValue, oldValue, scope.row);
             }
           "
         />
@@ -67,25 +67,25 @@
       width="120px"
       label="每轮发放总数"
     >
-      <template #default="{ item }">
+      <template #default="scope">
         <input-number
-          :disabled="item.row.CanSoldCount === '' || isEdit"
+          :disabled="scope.row.CanSoldCount === '' || isEdit"
           :precision="0"
-          v-model="item.row.RoundGrantTotalCount"
-          :key="item.row.DLTKEY + item.row.GrantCount"
+          v-model="scope.row.RoundGrantTotalCount"
+          :key="scope.row.DLTKEY + scope.row.GrantCount"
           :min="1"
-          :max="getMaxNum(item.row.CanSoldCount, maxRoundGrantTotalCount)"
+          :max="getMaxNum(scope.row.CanSoldCount, maxRoundGrantTotalCount)"
           @change="
             (newValue, oldValue) => {
-              onChangeRoundGrantTotalCount(newValue, oldValue, item.row);
+              onChangeRoundGrantTotalCount(newValue, oldValue, scope.row);
             }
           "
         />
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item label="库存" align="center">
-      <template #default="{ item }">
-        {{ item.row.CanSoldCount }}
+      <template #default="scope">
+        {{ scope.row.CanSoldCount }}
       </template>
     </dart-list-temp-item>
   </dart-list-temp>

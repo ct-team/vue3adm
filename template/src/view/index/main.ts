@@ -24,7 +24,7 @@ import {
   Table,
   TableColumn,
   Input,
-} from 'ct-dart3';
+} from 'ct-dart3/es/index';
 
 const app = createApp(App);
 app.config.globalProperties.$bus = mitt();
