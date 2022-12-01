@@ -88,11 +88,6 @@
         {{ item.row.CanSoldCount }}
       </template>
     </dart-list-temp-item>
-    <dart-list-temp-item label="中奖率" align="center">
-      <!-- <template #default="{ item }">
-        {{ getRateNum(item.row._id) }}
-      </template> -->
-    </dart-list-temp-item>
   </dart-list-temp>
 </template>
 <script lang="ts" setup>
