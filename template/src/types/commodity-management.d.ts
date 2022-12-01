@@ -19,7 +19,7 @@ export interface TypeOddsValue {
   CanSoldCount?: number | string;
   total?: number | string;
   odds?: number | string;
-  oldID?: string; //上一次批次
+  oldID?: string;
   loading?: boolean;
   ls?: number;
 }
