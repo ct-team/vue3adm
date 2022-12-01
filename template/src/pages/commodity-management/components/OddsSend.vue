@@ -89,9 +89,9 @@
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item label="中奖率" align="center">
-      <template #default="{ item }">
+      <!-- <template #default="{ item }">
         {{ getRateNum(item.row._id) }}
-      </template>
+      </template> -->
     </dart-list-temp-item>
   </dart-list-temp>
 </template>
