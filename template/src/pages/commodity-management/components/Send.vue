@@ -17,7 +17,7 @@
           :key="item.GrantType"
           :label="item.GrantType"
         >
-          {{ item.Name }}
+          <div v-html="item.Name"></div>
         </el-radio>
       </el-radio-group>
       <div>
@@ -41,7 +41,7 @@
     </el-form-item>
     <el-form-item label="可售数量">
       <template v-if="currentGrantType === 1">
-        <div>{{ count.total }}</div>
+        <div v-html="count.total"></div>
         <div class="color-gray">
           商品最多可售卖的数量，根据计算 【库存/发放数量】
           的最小值，向下取整获得
@@ -49,8 +49,7 @@
       </template>
       <template v-if="currentGrantType === 2">
         <div>
-          {{ count.total }} (每轮最多可售 {{ count.sale }} , 库存最多支持
-          {{ count.store }} 轮)
+          <span v-html="count.total"></span>
         </div>
         <div class="color-gray">
           商品最多可售卖的数量，每轮最多可售：【∑(每轮发放总数/单次发放数量)】

@@ -41,9 +41,7 @@
     </dart-list-temp-item>
     <dart-list-temp-item label="名称" min-width="100px">
       <template #default="scope">
-        <div>
-          {{ scope.row.Name }}
-        </div>
+        <div v-html="scope.row.Name"></div>
       </template>
     </dart-list-temp-item>
     <dart-list-temp-item prop="GrantCount" width="120px" label="单次发放数量">
@@ -85,7 +83,7 @@
     </dart-list-temp-item>
     <dart-list-temp-item label="库存" align="center">
       <template #default="scope">
-        {{ scope.row.CanSoldCount }}
+        <div v-html="scope.row.CanSoldCount"></div>
       </template>
     </dart-list-temp-item>
   </dart-list-temp>
