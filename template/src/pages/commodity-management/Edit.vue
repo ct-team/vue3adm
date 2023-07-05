@@ -249,7 +249,7 @@ const setSlideLoading = (type: boolean): void => {
 
 const onClosed = () => {
   router.push({
-    path: '/commodity-management',
+    path: '/',
   });
 };
 

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { config } from '@/config/permission';
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/commodity-management',
+    path: '/',
     component: () => import('@/pages/commodity-management/index.vue'),
     meta: { pageid: config.CM.pageId, title: config.CM.title },
     children: [

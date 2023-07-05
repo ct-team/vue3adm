@@ -65,7 +65,7 @@ import PublicSend from './PubicSend.vue';
 import OddsSend from './OddsSend.vue';
 import { TypeOddsValue, TypeCountItem } from '@/types/commodity-management';
 import { publicMode, oddoMode } from './send';
-import _ from 'lodash';
+import { debounce } from 'lodash-es';
 import useCommon from '@/hooks/use-common';
 const props = defineProps({
   GrantType: Number,
@@ -115,7 +115,7 @@ const vendibilityNum = () => {
   }
   changeCount(result);
 };
-const vendibilityNumComputed = _.debounce(vendibilityNum, 300);
+const vendibilityNumComputed = debounce(vendibilityNum, 300);
 const rules = [
   { required: true, message: '请添加发放商品', trigger: 'blur' },
   {

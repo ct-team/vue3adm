@@ -12,18 +12,23 @@
     <el-table-column prop="GoodsName" min-width="200" label="商品名称" />
     <el-table-column prop="GoodsTypeName" min-width="100" label="商品类型" />
     <el-table-column prop="GrantTypeName" width="100" label="发放类型" />
-    <el-table-column prop="Worth" width="100" label="商品价值" />
-    <dart-table-column prop="ImagePath" label="商品图片" width="120">
+    <el-table-column
+      prop="Worth"
+      width="100"
+      label="商品价值"
+    ></el-table-column>
+    <dart-table-column label="商品图片" prop="ImagePath" width="120">
       <template #default="scope">
         <el-image
           style="width: 100px; height: 50px"
           :src="scope.row.ImagePath"
         />
       </template>
+      <template #header><div>123</div></template>
     </dart-table-column>
-    <el-table-column prop="CanSoldCount" label="可售数量" width="100" />
-    <el-table-column prop="SoldCount" label="已售数量" width="100" />
-    <el-table-column
+    <dart-table-column prop="CanSoldCount" label="可售数量" width="100" />
+    <dart-table-column prop="SoldCount" label="已售数量" width="100" />
+    <dart-table-column
       width="70"
       prop="GoodsState"
       label="可售状态"

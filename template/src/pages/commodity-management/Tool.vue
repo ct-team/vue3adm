@@ -33,9 +33,9 @@ const routerPush = (path: string, id?: number): void => {
   });
 };
 const onAdd = (): void => {
-  routerPush('/commodity-management/add');
+  routerPush('/add');
 };
 const onAlert = () => {
-  routerPush('/commodity-management/alert-setting');
+  routerPush('/alert-setting');
 };
 </script>

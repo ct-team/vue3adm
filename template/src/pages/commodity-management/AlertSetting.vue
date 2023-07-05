@@ -123,7 +123,7 @@ const onClearVaid = (name: string) => {
 };
 const onClosed = () => {
   router.push({
-    path: '/commodity-management',
+    path: '/',
   });
 };
 const saveList = (data: Array<TypeAlertSetting>, complete: any) => {

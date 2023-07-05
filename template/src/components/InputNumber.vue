@@ -23,10 +23,7 @@
 </template>
 <script lang="ts" setup>
 import { computed, ref, watch, inject } from 'vue';
-import isNil from 'lodash/isNil';
-import isString from 'lodash/isString';
-import isUndefined from 'lodash/isUndefined';
-import debounce from 'lodash/debounce';
+import { isNil, isString, isUndefined, debounce } from 'lodash-es';
 import { formItemContextKey } from 'element-plus';
 type typeInputValue = number | undefined | string;
 

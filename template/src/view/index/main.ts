@@ -6,12 +6,12 @@ import store from '../../store';
 import '@/assets/js/publicpath';
 import ElementPlus, { ElMessage } from 'element-plus';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
-// import '../../assets/css/skin.scss';
+//import '../../assets/css/skin.scss';
 import * as ElementPlusIconsVue from '@/assets/js/icon';
 import { clearEmptyData } from '@/utils';
 import { apiGetPower } from '@/api/common';
 import { alias, isView } from '@/config/permission';
-import _ from 'lodash';
+import { isString } from 'lodash-es';
 import { ResponseInfo } from '@/types';
 import {
   Toolbar,
@@ -24,7 +24,7 @@ import {
   Table,
   TableColumn,
   Input,
-} from 'ct-dart3/es/index';
+} from 'ct-dart3';
 
 const app = createApp(App);
 app.config.globalProperties.$bus = mitt();
@@ -77,7 +77,7 @@ let PermissionPageId = 0;
 
 router.beforeEach(async (to) => {
   const pageid = Number(to.meta.pageid);
-  if (_.isString(to.meta.title)) {
+  if (isString(to.meta.title)) {
     document.title = to.meta.title;
   }
   if (pageid && PermissionPageId !== pageid) {

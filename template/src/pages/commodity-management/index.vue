@@ -39,7 +39,7 @@ const onSearch = (searchValue: TypeSearchInfo): void => {
 };
 
 const onOpenEdit = (id: number): void => {
-  routerPush('/commodity-management/edit', id);
+  routerPush('/edit', id);
 };
 const setTableLoading = (type: boolean) => {
   loading.value = type;

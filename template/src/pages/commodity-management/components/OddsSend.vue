@@ -94,8 +94,7 @@ import InputNumber from '@/components/InputNumber.vue';
 import { apiGetCouponByBatchNo } from '@/api/commodity-management';
 import { TypeOddsValue } from '@/types/commodity-management';
 import { ResponseInfo } from '@/types/index';
-import _ from 'lodash';
-import { mathjs } from '@/utils';
+import { isNumber, debounce, isArray } from 'lodash-es';
 import { getWinRateData, getRoundGrantTotalCount, getMaxNum } from './send';
 interface OddsProps {
   value: Array<TypeOddsValue>;
@@ -149,11 +148,11 @@ const checkBatchNoRepeat = (id: string): boolean => {
 };
 const getRateNum = (id: number) => {
   const value = winList[id];
-  return _.isNumber(value) ? mathjs.evaluate(`${value}*100`) + '%' : '--';
+  return isNumber(value) ? value * 100 + '%' : '--';
 };
 //设置中奖率对象 数值
 const setWinList = (data: Array<TypeOddsValue> | TypeOddsValue) => {
-  if (_.isArray(data)) {
+  if (isArray(data)) {
     data.forEach((element: TypeOddsValue) => {
       if (element._id) {
         winList[element._id] = element.Rate;
@@ -174,7 +173,7 @@ const winRateAndNum = (sourceData: Array<TypeOddsValue>) => {
 
   emit('change', newData.data);
 };
-const winRateDebounce = _.debounce(winRateAndNum, 300);
+const winRateDebounce = debounce(winRateAndNum, 300);
 
 const publicRules = {
   BatchNo: [

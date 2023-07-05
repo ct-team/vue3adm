@@ -66,7 +66,7 @@ import InputNumber from '@/components/InputNumber.vue';
 import { apiGetCouponByBatchNo } from '@/api/commodity-management';
 import { TypeOddsValue } from '@/types/commodity-management';
 import { ResponseInfo } from '@/types/index';
-import _ from 'lodash';
+import { debounce } from 'lodash-es';
 import { getMaxNum } from './send';
 interface OddsProps {
   value: Array<TypeOddsValue>;
@@ -91,7 +91,7 @@ watch(currentValue, (value) => {
 const changeEmit = (value: Array<TypeOddsValue>) => {
   emit('change', value);
 };
-const publicDebounce = _.debounce(changeEmit, 300);
+const publicDebounce = debounce(changeEmit, 300);
 
 const checkID = (rule: any, value: any, callback: any) => {
   let isRepeat = 0;

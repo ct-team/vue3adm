@@ -1,12 +1,12 @@
 import { TypeOddsValue, TypeCountItem } from '@/types/commodity-management.d';
-import _ from 'lodash';
+import { isNumber } from 'lodash-es';
 //可售数量计算 普通模式
 export const publicMode = (
   GoodsDetail: Array<TypeOddsValue>
 ): TypeCountItem => {
   const result: Array<number> = [];
   GoodsDetail.forEach((item: any) => {
-    if (_.isNumber(item.GrantCount) && _.isNumber(item.CanSoldCount)) {
+    if (isNumber(item.GrantCount) && isNumber(item.CanSoldCount)) {
       result.push(Math.floor(item.CanSoldCount / item.GrantCount));
       return;
     }
@@ -24,9 +24,9 @@ export const oddoMode = (GoodsDetail: Array<TypeOddsValue>): TypeCountItem => {
   let sale = 0;
   for (const item of GoodsDetail) {
     if (
-      !_.isNumber(item.CanSoldCount) ||
-      !_.isNumber(item.GrantCount) ||
-      !_.isNumber(item.RoundGrantTotalCount)
+      !isNumber(item.CanSoldCount) ||
+      !isNumber(item.GrantCount) ||
+      !isNumber(item.RoundGrantTotalCount)
     ) {
       return { total: 0, store: 0, sale: 0 };
     }
@@ -49,9 +49,9 @@ export const getWinRateData = (
   let lsCount = 0;
   let data: Array<TypeOddsValue> = sourceData.map((element: TypeOddsValue) => {
     if (
-      _.isNumber(element.CanSoldCount) &&
-      _.isNumber(element.GrantCount) &&
-      _.isNumber(element.RoundGrantTotalCount)
+      isNumber(element.CanSoldCount) &&
+      isNumber(element.GrantCount) &&
+      isNumber(element.RoundGrantTotalCount)
     ) {
       const num = Math.floor(element.RoundGrantTotalCount / element.GrantCount);
       element.ls = num;
